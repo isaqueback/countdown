@@ -63,6 +63,7 @@ export const CountdownHeader = styled.div`
 `
 
 export const CountdownContent = styled.div`
+    width: 29.625rem;
     font-size: 4.5rem;
     font-weight: 400;
     color: ${props => props.theme["gray-800"]};
