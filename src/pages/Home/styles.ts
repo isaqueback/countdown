@@ -8,10 +8,17 @@ export const HomeContainer = styled.div`
     
     img {
         width: 37.9375rem;
-        height: 27.1875rem;
         z-index: 1;
     }
-    
+
+    @media(max-width: 1120px) {
+        flex-direction: column;
+        justify-content: space-around;
+
+        img {
+            width: 25rem;
+        }
+    }
     `
 
 export const CountdownContainer = styled.div`
@@ -38,7 +45,10 @@ export const CountdownContainer = styled.div`
         color: ${props => props.theme["gray-300"]};
         margin-bottom: 1.5rem;
     }
-    
+
+    @media (max-width: 1120px) {
+        height: 16.24rem;
+    }
     `
 
 export const CountdownHeader = styled.div`
@@ -50,15 +60,25 @@ export const CountdownHeader = styled.div`
     justify-content: space-around;
 
     span:first-child {
-        padding-left: 0.5rem
+        padding-left: 1rem
     }
 
     span:nth-child(2) {
         padding-left: 2rem;
     }
 
-    span:nth-child(3) {
-        padding-left: 2rem;
+    span:last-child {
+        margin-right: -2rem;
+    }
+
+    @media (max-width: 1120px) {
+        span:first-child, span:nth-child(2) {
+            padding-left: 0;
+        }
+
+        span:last-child {
+            margin-right: 2rem;
+        }
     }
 `
 
@@ -72,16 +92,24 @@ export const CountdownContent = styled.div`
     span {
         padding: 0 0.5rem;
     }
+
+    @media(max-width: 1120px) {
+        font-size: 3.5rem;
+    }
 `
 
-export const SubscribeButton = styled.button`
+interface SubscribeButtonProps {
+    isButtonActive: boolean
+}
+
+export const SubscribeButton = styled.button<SubscribeButtonProps>`
     width: 10rem;
     height: 2.87rem;
     background-color: ${props => props.theme["blue-500"]};
     color: ${props => props.theme.white};
     border-radius: 10px;
     border: none;
-    cursor: pointer;
+    cursor:  ${props => props.isButtonActive ? 'pointer' : 'not-allowed'};
     transition: filter 0.2s;
     font-size: 1rem;
     font-weight: 400;
@@ -89,8 +117,9 @@ export const SubscribeButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: grayscale(${props => props.isButtonActive ? 0 : 1});
 
     &:hover {
-        filter: brightness(0.95)
+        ${props => props.isButtonActive ? 'filter: brightness(0.95)' : ''}
     }
 `

@@ -1,31 +1,41 @@
 import { CountdownContainer, CountdownContent, CountdownHeader, HomeContainer, SubscribeButton } from "./styles";
 import rocket from '../../assets/rocket.svg'
 import intervalToDuration from 'date-fns/intervalToDuration'
-import format from 'date-fns/format'
+import differenceInSeconds from 'date-fns/differenceInSeconds'
+
 import { useEffect, useState } from "react";
 
 export function Home() {
-    const [releaseDate] = useState(() => {
-        const nextMonth = new Date().getMonth() + 1
-        const updatedYear = nextMonth === 0 ? new Date().getFullYear() + 1 : new Date().getFullYear()
-        return new Date(updatedYear, nextMonth, 1, 0, 0, 0)
-    })
     const [currentDate, setCurrentDate] = useState(new Date())
+    const [isRelease, setIsRelease] = useState(false)
+    const [releaseDate] = useState(() => {
+        return new Date((new Date().getTime() + 60000))
+    })
 
     let duration = intervalToDuration({
         start: currentDate,
         end: releaseDate
     })
-
+    let elapsedTime = differenceInSeconds(releaseDate, currentDate)
+    let countdownInterval: number
     useEffect(() => {
-        setInterval(() => {
-            setCurrentDate(new Date())
-            duration = intervalToDuration({
-                start: currentDate,
-                end: releaseDate
-            })
-        }, 1000)
-    }, [currentDate])
+        if (!isRelease) {
+            countdownInterval = setInterval(() => {
+                setCurrentDate(new Date())
+                duration = intervalToDuration({
+                    start: currentDate,
+                    end: releaseDate
+                })
+
+                elapsedTime = differenceInSeconds(releaseDate, currentDate)
+                elapsedTime <= 0 ? setIsRelease(true) : ''
+            }, 1000)
+        }
+
+        return () => {
+            clearInterval(countdownInterval)
+        }
+    }, [elapsedTime])
 
     return (
         <HomeContainer>
@@ -38,16 +48,16 @@ export function Home() {
                     <span>Segundos</span>
                 </CountdownHeader>
                 <CountdownContent>
-                    <span>{duration.days !== undefined && duration.days < 10 ? '0' + duration.days : duration.days }</span>
+                    <span>{duration.days !== undefined && duration.days < 10 ? '0' + duration.days : duration.days}</span>
                     <span>:</span>
-                    <span>{duration.hours !== undefined && duration.hours < 10 ? '0' + duration.hours : duration.hours }</span>
+                    <span>{duration.hours !== undefined && duration.hours < 10 ? '0' + duration.hours : duration.hours}</span>
                     <span>:</span>
-                    <span>{duration.minutes !== undefined && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes }</span>
+                    <span>{duration.minutes !== undefined && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes}</span>
                     <span>:</span>
-                    <span>{duration.seconds !== undefined && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds }</span>
+                    <span>{duration.seconds !== undefined && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
                 </CountdownContent>
                 <p>Inscreva-se para saber mais sobre o lançamento</p>
-                <SubscribeButton>
+                <SubscribeButton isButtonActive={isRelease}>
                     Inscreva-se
                 </SubscribeButton>
             </CountdownContainer>
