@@ -109,7 +109,7 @@ export const SubscribeButton = styled.button<SubscribeButtonProps>`
     color: ${props => props.theme.white};
     border-radius: 10px;
     border: none;
-    cursor:  ${props => props.isButtonActive ? 'pointer' : 'not-allowed'};
+    cursor:  ${props => props.isButtonActive ? 'pointer' : 'not-allowed'} !important;;
     transition: filter 0.2s;
     font-size: 1rem;
     font-weight: 400;

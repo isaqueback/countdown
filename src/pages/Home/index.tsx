@@ -1,9 +1,10 @@
-import { CountdownContainer, CountdownContent, CountdownHeader, HomeContainer, SubscribeButton } from "./styles";
+import { CountdownContainer, CountdownContent, CountdownHeader, HomeContainer } from "./styles";
 import rocket from '../../assets/rocket.svg'
 import intervalToDuration from 'date-fns/intervalToDuration'
 import differenceInSeconds from 'date-fns/differenceInSeconds'
 
 import { useEffect, useState } from "react";
+import { FormModal } from "./components/Modal";
 
 export function Home() {
     const [currentDate, setCurrentDate] = useState(new Date())
@@ -57,9 +58,10 @@ export function Home() {
                     <span>{duration.seconds !== undefined && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
                 </CountdownContent>
                 <p>Inscreva-se para saber mais sobre o lançamento</p>
-                <SubscribeButton isButtonActive={isRelease}>
+                {/* <SubscribeButton isButtonActive={isRelease}>
                     Inscreva-se
-                </SubscribeButton>
+                </SubscribeButton> */}
+                <FormModal isRelease={isRelease}/>
             </CountdownContainer>
 
             <img src={rocket} alt="rocket" />
