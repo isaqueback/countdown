@@ -49,13 +49,13 @@ export function Home() {
                     <span>Segundos</span>
                 </CountdownHeader>
                 <CountdownContent>
-                    <span>{duration.days !== undefined && duration.days < 10 ? '0' + duration.days : duration.days}</span>
+                    <span>{duration.days && duration.days < 10 ? '0' + duration.days : duration.days}</span>
                     <span>:</span>
-                    <span>{duration.hours !== undefined && duration.hours < 10 ? '0' + duration.hours : duration.hours}</span>
+                    <span>{duration.hours && duration.hours < 10 ? '0' + duration.hours : duration.hours}</span>
                     <span>:</span>
-                    <span>{duration.minutes !== undefined && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes}</span>
+                    <span>{duration.minutes && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes}</span>
                     <span>:</span>
-                    <span>{duration.seconds !== undefined && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
+                    <span>{duration.seconds && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
                 </CountdownContent>
                 <p>Inscreva-se para saber mais sobre o lançamento</p>
                 {/* <SubscribeButton isButtonActive={isRelease}>
