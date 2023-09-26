@@ -16,10 +16,11 @@ export const GlobalStyle = createGlobalStyle`
         background-repeat: no-repeat;
         z-index: 0;
         
-        &:before{
+        &::before{
             background-image: url(${bottomImage});
             background-repeat: no-repeat;
-            background-position: bottom;
+            background-position: left bottom;
+            background-size: contain;
             width: 100vw;
             height: 100vh;
             content: '';

@@ -10,7 +10,7 @@ export function Home() {
     const [currentDate, setCurrentDate] = useState(new Date())
     const [isRelease, setIsRelease] = useState(false)
     const [releaseDate] = useState(() => {
-        return new Date((new Date().getTime() + 60000))
+        return new Date((new Date().getTime() + 30000))
     })
 
     let duration = intervalToDuration({
