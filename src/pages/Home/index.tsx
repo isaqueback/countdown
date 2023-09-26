@@ -1,4 +1,4 @@
-import { CountdownContainer, CountdownContent, CountdownHeader, HomeContainer } from "./styles";
+import { CountdownContainer, HomeContainer } from "./styles";
 import rocket from '../../assets/rocket.svg'
 import intervalToDuration from 'date-fns/intervalToDuration'
 import differenceInSeconds from 'date-fns/differenceInSeconds'
@@ -42,26 +42,27 @@ export function Home() {
         <HomeContainer>
             <CountdownContainer>
                 <h1>Ready to launch in...</h1>
-                <CountdownHeader>
-                    <span>Dias</span>
-                    <span>Horas</span>
-                    <span>Minutos</span>
-                    <span>Segundos</span>
-                </CountdownHeader>
-                <CountdownContent>
-                    <span>{duration.days && duration.days < 10 ? '0' + duration.days : duration.days}</span>
-                    <span>:</span>
-                    <span>{duration.hours && duration.hours < 10 ? '0' + duration.hours : duration.hours}</span>
-                    <span>:</span>
-                    <span>{duration.minutes && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes}</span>
-                    <span>:</span>
-                    <span>{duration.seconds && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
-                </CountdownContent>
+                <div>
+                    <div>
+                        <span>Dias</span>
+                        <span>{duration.days && duration.days < 10 ? '0' + duration.days : duration.days} : </span>
+                    </div>
+                    <div>
+                        <span>Horas</span>
+                        <span>{duration.hours && duration.hours < 10 ? '0' + duration.hours : duration.hours} : </span>
+                    </div>
+                    <div>
+                        <span>Minutos</span>
+                        <span>{duration.minutes && duration.minutes < 10 ? '0' + duration.minutes : duration.minutes} : </span>
+                    </div>
+                    <div>
+                        <span>Segundos</span>
+                        <span>{duration.seconds && duration.seconds < 10 ? '0' + duration.seconds : duration.seconds}</span>
+                    </div>
+                </div>
                 <p>Inscreva-se para saber mais sobre o lançamento</p>
-                {/* <SubscribeButton isButtonActive={isRelease}>
-                    Inscreva-se
-                </SubscribeButton> */}
-                <FormModal isRelease={isRelease}/>
+                
+                <FormModal isRelease={isRelease} />
             </CountdownContainer>
 
             <img src={rocket} alt="rocket" />
